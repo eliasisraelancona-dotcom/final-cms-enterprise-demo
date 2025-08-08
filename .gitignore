@@ -1,2 +1,4 @@
 public/
 keystone.db
+node_modules/
+.keystone/
