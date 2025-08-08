@@ -1,19 +1,106 @@
-🎯 Adobe Enterprise CMS - Cursor Demo
-A sophisticated Digital Asset Management (DAM) system showcasing Cursor's enterprise development capabilities.
-This demo application demonstrates how Cursor transforms enterprise development from hours of manual coding to minutes of intelligent assistance. Built for the Adobe onboarding presentation, it showcases real-world enterprise complexity that resonates with large organizations.
-🏢 Why This Demo Matters for Adobe
-Enterprise Reality Check
-Before Cursor: 2–3 days to build a basic CMS with role-based access
-With Cursor: 30 minutes to create a production-ready enterprise system
-The Difference: Cursor understands enterprise patterns and generates sophisticated architectures instantly
-Real Enterprise Features
-✅ Role-Based Access Control — 7 distinct roles with granular permissions
-✅ Digital Asset Management — Upload, approve, and track enterprise assets
-✅ Brand Management — Multi-brand support with compliance workflows
-✅ Content Workflows — Draft → Review → Approved → Published
-✅ Audit Trails — Complete compliance logging for enterprise requirements
-✅ Analytics & Reporting — Usage tracking and performance metrics
-✅ Department Isolation — Secure multi-tenant organizational structure
-✅ Q and A function — A secure form system to add questions and answers
+# As of Friday AUgust 8th at 7:15 PM EST we are going to use this demo moving forward
 
-Feel free to update this project. When I re-open this project from github I DO NOT want any prisma or schema or graphql issues. PLEASE
+## Adobe Enterprise CMS (Demo)
+
+This repository contains a demonstration Digital Asset Management (DAM) and CMS showcasing enterprise-grade patterns including role-based access control, workflow, and compliance. It is intended for reliable reuse without Prisma/GraphQL/schema issues when reopened.
+
+### What this demo includes
+- Role-Based Access Control with 7+ roles and granular permissions
+- Digital Asset Management: upload, review, approve, archive; tagging and ownership
+- Brand Management: multi-brand with compliance status and guidelines
+- Content Workflows: Draft → Review → Approved → Published with reviewers
+- Audit & Analytics: audit logs and analytics events
+- Department Isolation: access control by department
+- Q&A: questions, answers, and tagging
+
+### Technology
+- Keystone 6
+- Prisma (SQLite)
+- TypeScript / Node.js
+- Express (static assets)
+
+---
+
+## Getting Started
+
+### Prerequisites
+- Node.js v18+ and npm
+
+### Install
+```bash
+npm install
+```
+
+### Development server
+```bash
+npm run dev
+```
+- Admin UI: http://localhost:3000
+- First run seeds demo data; subsequent runs are idempotent (data is preserved).
+
+### Build and start
+```bash
+npm run build
+npm start
+```
+
+---
+
+## Data & Persistence
+
+- Database: SQLite at `./keystone.db` (can be overridden via `DATABASE_URL`).
+- Data persists across restarts. Seeding only adds missing baseline records (ensures a super admin exists).
+- Reset (optional):
+```bash
+rm -f keystone.db
+npm run dev
+```
+
+---
+
+## Files and Images
+
+- Files served from `public/files` at `/files`.
+- Images served from `public/images` at `/images`.
+- Max upload size: 40Mb.
+
+---
+
+## Scripts
+
+- `npm run dev` — Start Keystone in development
+- `npm run build` — Build the project
+- `npm start` — Start the built server
+- `npm run seed-data` — Run the seed routine explicitly
+- `postinstall` — Keystone postinstall
+
+---
+
+## Cursor Agent Rules
+
+- Always initialize the server upon opening this project:
+  - Run `npm install` if dependencies are not installed
+  - Run `npm run dev` and wait for the Admin UI at http://localhost:3000
+  - Verify seeding completes without errors and the Admin UI is accessible
+- Maintain schema stability:
+  - Do not edit `schema.prisma` directly; update lists/fields in `schema.ts` and let Keystone regenerate
+  - Avoid introducing Prisma/GraphQL/schema errors
+- Environment details:
+  - App port: 3000; Prisma Studio (if used) default port: 5555
+  - Database path: `./keystone.db` (override via `DATABASE_URL`)
+- Shut down cleanly: Ctrl+C in terminals running the server and tooling
+
+---
+
+## Troubleshooting
+
+- Port in use:
+```bash
+lsof -ti :3000 | xargs kill -9
+```
+
+- Prisma Studio:
+```bash
+DATABASE_URL="file:./keystone.db" npx prisma generate
+DATABASE_URL="file:./keystone.db" npx prisma studio
+```
