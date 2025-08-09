@@ -1,11 +1,16 @@
 /** @jsxRuntime classic */
+/** @jsx jsx */
 import { jsx } from '@keystone-ui/core'
 import { NavigationContainer, ListNavItems, NavItem } from '@keystone-6/core/admin-ui/components'
 import type { NavigationProps } from '@keystone-6/core/admin-ui/components'
-import { useKeystone } from '@keystone-6/core/admin-ui/context'
 
 export function CustomNavigation({ authenticatedItem, lists }: NavigationProps) {
-  const { endSession } = useKeystone()
+  const handleSignOut = async () => {
+    try {
+      await fetch('/api/auth/signout', { method: 'POST' })
+    } catch {}
+    window.location.assign('/signin')
+  }
 
   return (
     <NavigationContainer authenticatedItem={authenticatedItem}>
@@ -26,7 +31,7 @@ export function CustomNavigation({ authenticatedItem, lists }: NavigationProps) 
             padding: 12,
           }}
         >
-          <button onClick={() => endSession?.()} aria-label="Sign out">
+          <button onClick={handleSignOut} aria-label="Sign out">
             Sign out
           </button>
         </div>
