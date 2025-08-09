@@ -174,6 +174,8 @@ model Question {
   subject      String      @default("")
   body         String      @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
   status       String?     @default("new")
+  askedAt      DateTime?
+  roadmapType  String?     @default("none")
   department   Department? @relation("Question_department", fields: [departmentId], references: [id])
   departmentId String?     @map("department")
   askedBy      User?       @relation("Question_askedBy", fields: [askedById], references: [id])

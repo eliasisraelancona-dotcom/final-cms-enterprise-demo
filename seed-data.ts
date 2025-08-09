@@ -323,6 +323,8 @@ export async function seedDemoData(context: any) {
       {
         subject: 'Can we use the old logo on social? ',
         status: 'new',
+        askedAt: new Date(),
+        roadmapType: 'fyi',
         department: { connect: { id: deptBySlug['marketing'].id } },
         askedBy: { connect: { id: userByEmail['vera.viewer@example.com'].id } },
         tags: { connect: tags.slice(0, 2).map(t => ({ id: t.id })) },
@@ -330,6 +332,8 @@ export async function seedDemoData(context: any) {
       {
         subject: 'Press kit approval timeline',
         status: 'triage',
+        askedAt: new Date(),
+        roadmapType: 'blocker',
         department: { connect: { id: deptBySlug['marketing'].id } },
         askedBy: { connect: { id: userByEmail['cameron.content@example.com'].id } },
         tags: { connect: tags.slice(1, 4).map(t => ({ id: t.id })) },

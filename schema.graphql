@@ -910,6 +910,8 @@ type Question {
   subject: String
   body: Question_body_Document
   status: QuestionStatusType
+  askedAt: DateTime
+  roadmapType: QuestionRoadmapTypeType
   department: Department
   askedBy: User
   tags(where: TagWhereInput! = {}, orderBy: [TagOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TagWhereUniqueInput): [Tag!]
@@ -927,6 +929,12 @@ enum QuestionStatusType {
   closed
 }
 
+enum QuestionRoadmapTypeType {
+  none
+  blocker
+  fyi
+}
+
 input QuestionWhereUniqueInput {
   id: ID
 }
@@ -938,6 +946,8 @@ input QuestionWhereInput {
   id: IDFilter
   subject: StringFilter
   status: QuestionStatusTypeNullableFilter
+  askedAt: DateTimeNullableFilter
+  roadmapType: QuestionRoadmapTypeTypeNullableFilter
   department: DepartmentWhereInput
   askedBy: UserWhereInput
   tags: TagManyRelationFilter
@@ -950,16 +960,27 @@ input QuestionStatusTypeNullableFilter {
   not: QuestionStatusTypeNullableFilter
 }
 
+input QuestionRoadmapTypeTypeNullableFilter {
+  equals: QuestionRoadmapTypeType
+  in: [QuestionRoadmapTypeType!]
+  notIn: [QuestionRoadmapTypeType!]
+  not: QuestionRoadmapTypeTypeNullableFilter
+}
+
 input QuestionOrderByInput {
   id: OrderDirection
   subject: OrderDirection
   status: OrderDirection
+  askedAt: OrderDirection
+  roadmapType: OrderDirection
 }
 
 input QuestionUpdateInput {
   subject: String
   body: JSON
   status: QuestionStatusType
+  askedAt: DateTime
+  roadmapType: QuestionRoadmapTypeType
   department: DepartmentRelateToOneForUpdateInput
   askedBy: UserRelateToOneForUpdateInput
   tags: TagRelateToManyForUpdateInput
@@ -974,6 +995,8 @@ input QuestionCreateInput {
   subject: String
   body: JSON
   status: QuestionStatusType
+  askedAt: DateTime
+  roadmapType: QuestionRoadmapTypeType
   department: DepartmentRelateToOneForCreateInput
   askedBy: UserRelateToOneForCreateInput
   tags: TagRelateToManyForCreateInput
