@@ -12,10 +12,15 @@ export function CustomNavigation({ authenticatedItem, lists }: NavigationProps) 
       if (keystone?.endSession) {
         await keystone.endSession()
       } else {
-        await fetch('/api/auth/signout', { method: 'POST' })
+        await fetch('/api/graphql', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ query: 'mutation { unauthenticate: unauthenticateUser { success } }' }),
+          credentials: 'include',
+        })
       }
     } catch {}
-    window.location.assign('/signin')
+    window.location.replace('/signin')
   }
 
   return (
