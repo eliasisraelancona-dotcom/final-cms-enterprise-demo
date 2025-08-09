@@ -20,6 +20,7 @@
   rm -f keystone.db
   npm run dev
   ```
+  This recreates the demo data, including the curated FAQs in `Questions`.
 - Prisma Studio:
   ```bash
   DATABASE_URL="file:./keystone.db" npx prisma generate
@@ -32,4 +33,5 @@
   ```bash
   lsof -ti :3000 | xargs kill -9
   ```
+  If the Admin UI shows an `ENOENT` while compiling, wait for the terminal to report "Admin UI ready" then refresh.
 

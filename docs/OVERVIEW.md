@@ -16,10 +16,14 @@ Enterprise-grade demo of DAM + CMS with RBAC, workflows, brand governance, and a
 - Audit & Analytics events
 - Department isolation and Q&A with tagging
 
+## Seeded FAQs
+- The demo seeds a set of enterprise-focused questions (marked Answered) covering security/privacy, Privacy Mode guarantees, rules customization, enterprise rollout, and comparisons (Cursor vs Copilot/Codeium). These live under `Questions` in the Admin UI and persist across fresh clones via seeding.
+
 ## How to Run
 - Install: `npm install`
 - Dev: `npm run dev` → Admin UI: http://localhost:3000
 - First-run seeds demo data, idempotent on subsequent runs
+  - To reseed locally: delete `./keystone.db` and run `npm run dev` again
 
 ## Data & Files
 - DB: SQLite at `./keystone.db` (override with `DATABASE_URL`)

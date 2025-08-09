@@ -338,6 +338,271 @@ export async function seedDemoData(context: any) {
         askedBy: { connect: { id: userByEmail['cameron.content@example.com'].id } },
         tags: { connect: tags.slice(1, 4).map(t => ({ id: t.id })) },
       },
+      // --- Adobe FAQ (seeded) ---
+      {
+        subject: 'How does Cursor safeguard Adobe’s source code and sensitive IP?',
+        status: 'answered',
+        askedAt: new Date(),
+        roadmapType: 'fyi',
+        department: { connect: { id: deptBySlug['engineering'].id } },
+        askedBy: { connect: { id: userByEmail['eliasisrael@adobe.com'].id } },
+        tags: { connect: tags.filter(t => ['Legal'].includes(t.name!)).map(t => ({ id: t.id })) },
+        body: [
+          {
+            type: 'paragraph',
+            children: [
+              {
+                text:
+                  'Cursor follows industry-standard practices for data security and privacy and operates with enterprise-grade controls. Adobe teams can enable Privacy Mode to prevent code and project files from being uploaded; editing and AI assistance then occur locally.',
+              },
+            ],
+          },
+          {
+            type: 'paragraph',
+            children: [
+              {
+                text:
+                  'For sensitive environments, Privacy Mode further reduces data surface area while preserving helpful tooling.',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        subject: 'How does Cursor understand our codebase?',
+        status: 'answered',
+        askedAt: new Date(),
+        roadmapType: 'fyi',
+        department: { connect: { id: deptBySlug['engineering'].id } },
+        askedBy: { connect: { id: userByEmail['eliasisrael@adobe.com'].id } },
+        body: [
+          {
+            type: 'paragraph',
+            children: [
+              {
+                text:
+                  'Cursor ingests your workspace (code and docs) to build an internal representation. This context allows it to reference surrounding files and project structure when proposing edits and answers.',
+              },
+            ],
+          },
+          {
+            type: 'paragraph',
+            children: [
+              {
+                text:
+                  'Metaphor: imagine your repository as a large library. Cursor does not read or store every book each time. Instead, it maintains smart index cards summarizing chapters and where to find them. When you ask a question, it uses those cards to locate only the relevant chapters before reading them.',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        subject: 'Can you explain Privacy Mode guarantees?',
+        status: 'answered',
+        askedAt: new Date(),
+        roadmapType: 'fyi',
+        department: { connect: { id: deptBySlug['legal'].id } },
+        askedBy: { connect: { id: userByEmail['eliasisrael@adobe.com'].id } },
+        tags: { connect: tags.filter(t => ['Legal'].includes(t.name!)).map(t => ({ id: t.id })) },
+        body: [
+          { type: 'paragraph', children: [{ text: 'Key guarantees:' }] },
+          {
+            type: 'paragraph',
+            children: [
+              { text: '• No training on your code. ' },
+              { text: '• No storage of code content. ' },
+              { text: '• No logging of code content. ' },
+              {
+                text:
+                  '• Requests are handled by isolated privacy services (including background jobs and queues).',
+              },
+            ],
+          },
+          { type: 'paragraph', children: [{ text: 'Enforcement:' }] },
+          {
+            type: 'paragraph',
+            children: [
+              {
+                text:
+                  '• For team plans, Privacy Mode is enforced by default. Client and server both apply safeguards with conservative fallbacks.',
+              },
+            ],
+          },
+          { type: 'paragraph', children: [{ text: 'How it works (at a glance):' }] },
+          {
+            type: 'paragraph',
+            children: [
+              {
+                text:
+                  '• Requests include a privacy flag; they are routed to dedicated privacy-safe services that do not log, store, or retain prompts/completions. If the flag is missing, the system assumes privacy mode to be safe.',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        subject: 'What is your client security model?',
+        status: 'answered',
+        askedAt: new Date(),
+        roadmapType: 'fyi',
+        department: { connect: { id: deptBySlug['engineering'].id } },
+        askedBy: { connect: { id: userByEmail['eliasisrael@adobe.com'].id } },
+        body: [
+          {
+            type: 'paragraph',
+            children: [
+              {
+                text:
+                  'Cursor is a fork of VS Code. High-severity upstream security fixes are cherry-picked promptly between merges.',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        subject: 'How can we customize Cursor’s behavior?',
+        status: 'answered',
+        askedAt: new Date(),
+        roadmapType: 'fyi',
+        department: { connect: { id: deptBySlug['engineering'].id } },
+        askedBy: { connect: { id: userByEmail['eliasisrael@adobe.com'].id } },
+        body: [
+          {
+            type: 'paragraph',
+            children: [
+              {
+                text:
+                  'Cursor supports Rules — persistent, system-level instructions that guide style, linting, workflows, and team conventions. Rules can be applied per user and per repository.',
+              },
+            ],
+          },
+          {
+            type: 'paragraph',
+            children: [
+              {
+                text:
+                  'There are User rules (global to your projects) and Project rules (checked into a repo-specific folder) so teams can enforce standards automatically.',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        subject: 'How do we deploy and manage Cursor across Adobe’s teams?',
+        status: 'answered',
+        askedAt: new Date(),
+        roadmapType: 'fyi',
+        department: { connect: { id: deptBySlug['engineering'].id } },
+        askedBy: { connect: { id: userByEmail['eliasisrael@adobe.com'].id } },
+        body: [
+          {
+            type: 'paragraph',
+            children: [
+              {
+                text:
+                  'Cursor Enterprise offers admin controls for rollout, access permissions, SSO/IdP integration, and shared rules. Teams can centrally define rules and context integrations across repositories from day one.',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        subject: 'How does Cursor work with Security and Privacy overall?',
+        status: 'answered',
+        askedAt: new Date(),
+        roadmapType: 'fyi',
+        department: { connect: { id: deptBySlug['legal'].id } },
+        askedBy: { connect: { id: userByEmail['eliasisrael@adobe.com'].id } },
+        tags: { connect: tags.filter(t => ['Legal'].includes(t.name!)).map(t => ({ id: t.id })) },
+        body: [
+          {
+            type: 'paragraph',
+            children: [
+              { text: '• Your code is never used to train our models.' },
+            ],
+          },
+          {
+            type: 'paragraph',
+            children: [
+              { text: '• Requests are processed securely; code is not sent to public LLMs.' },
+            ],
+          },
+          {
+            type: 'paragraph',
+            children: [
+              { text: '• .cursorignore is respected; only explicitly allowed paths are indexed.' },
+            ],
+          },
+          {
+            type: 'paragraph',
+            children: [
+              { text: '• Infrastructure is built for auditability, data control, and compliance alignment.' },
+            ],
+          },
+          {
+            type: 'paragraph',
+            children: [
+              { text: 'We can schedule a session with the security team to review architecture and policies in detail.' },
+            ],
+          },
+        ],
+      },
+      {
+        subject: 'How will the TAM help us?',
+        status: 'answered',
+        askedAt: new Date(),
+        roadmapType: 'fyi',
+        department: { connect: { id: deptBySlug['engineering'].id } },
+        askedBy: { connect: { id: userByEmail['eliasisrael@adobe.com'].id } },
+        body: [
+          {
+            type: 'paragraph',
+            children: [
+              { text: 'Dedicated enablement and support to unblock your team quickly.' },
+            ],
+          },
+          {
+            type: 'paragraph',
+            children: [
+              { text: 'Direct line to product for feedback, roadmap input, and escalations.' },
+            ],
+          },
+          {
+            type: 'paragraph',
+            children: [
+              { text: 'Security and privacy guidance tailored for enterprise workflows.' },
+            ],
+          },
+        ],
+      },
+      {
+        subject: 'What is the difference between Copilot / Codeium (Windsurf) and Cursor?',
+        status: 'answered',
+        askedAt: new Date(),
+        roadmapType: 'fyi',
+        department: { connect: { id: deptBySlug['engineering'].id } },
+        askedBy: { connect: { id: userByEmail['eliasisrael@adobe.com'].id } },
+        body: [
+          {
+            type: 'paragraph',
+            children: [
+              {
+                text:
+                  'Copilot excels at inline suggestions but is weaker on repository-wide context and edit flows. Codeium/Windsurf is fast but lacks full IDE integration, limiting deep repository understanding.',
+              },
+            ],
+          },
+          {
+            type: 'paragraph',
+            children: [
+              {
+                text:
+                  'Cursor focuses on end-to-end developer UX inside the IDE, combining context awareness with powerful edit workflows to boost productivity. The community continues to grow with events and shared practices.',
+              },
+            ],
+          },
+        ],
+      },
     ].map((q: any) => context.db.Question.createOne({ data: q }))
   )
 
