@@ -4,6 +4,6 @@
   "/_document": "pages/_document.js",
   "/signin": "pages/signin.js",
   "/": "pages/index.js",
-  "/roles": "pages/roles.js",
-  "/users": "pages/users.js"
+  "/questions": "pages/questions.js",
+  "/questions/[id]": "pages/questions/[id].js"
 }

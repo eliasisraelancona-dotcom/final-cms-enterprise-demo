@@ -161,7 +161,6 @@ input RoleCreateInput {
 input UserRelateToManyForCreateInput {
   create: [UserCreateInput!]
   connect: [UserWhereUniqueInput!]
-  set: [UserWhereUniqueInput!]
 }
 
 type Department {
@@ -236,7 +235,6 @@ input DepartmentCreateInput {
 input BrandRelateToManyForCreateInput {
   create: [BrandCreateInput!]
   connect: [BrandWhereUniqueInput!]
-  set: [BrandWhereUniqueInput!]
 }
 
 type Brand {
@@ -369,13 +367,11 @@ input DepartmentRelateToOneForCreateInput {
 input AssetRelateToManyForCreateInput {
   create: [AssetCreateInput!]
   connect: [AssetWhereUniqueInput!]
-  set: [AssetWhereUniqueInput!]
 }
 
 input ContentRelateToManyForCreateInput {
   create: [ContentCreateInput!]
   connect: [ContentWhereUniqueInput!]
-  set: [ContentWhereUniqueInput!]
 }
 
 type User {
@@ -511,7 +507,6 @@ input TagCreateInput {
 input QuestionRelateToManyForCreateInput {
   create: [QuestionCreateInput!]
   connect: [QuestionWhereUniqueInput!]
-  set: [QuestionWhereUniqueInput!]
 }
 
 type Asset {
@@ -538,11 +533,11 @@ enum AssetStatusType {
 
 type ImageFieldOutput {
   id: ID!
-  url: String!
-  extension: ImageExtension!
   filesize: Int!
   width: Int!
   height: Int!
+  extension: ImageExtension!
+  url: String!
 }
 
 enum ImageExtension {
@@ -671,7 +666,6 @@ input UserRelateToOneForCreateInput {
 input TagRelateToManyForCreateInput {
   create: [TagCreateInput!]
   connect: [TagWhereUniqueInput!]
-  set: [TagWhereUniqueInput!]
 }
 
 type Content {
@@ -920,8 +914,6 @@ type Question {
   askedBy: User
   tags(where: TagWhereInput! = {}, orderBy: [TagOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: TagWhereUniqueInput): [Tag!]
   tagsCount(where: TagWhereInput! = {}): Int
-  answers(where: AnswerWhereInput! = {}, orderBy: [AnswerOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: AnswerWhereUniqueInput): [Answer!]
-  answersCount(where: AnswerWhereInput! = {}): Int
 }
 
 type Question_body_Document {
@@ -949,7 +941,6 @@ input QuestionWhereInput {
   department: DepartmentWhereInput
   askedBy: UserWhereInput
   tags: TagManyRelationFilter
-  answers: AnswerManyRelationFilter
 }
 
 input QuestionStatusTypeNullableFilter {
@@ -957,12 +948,6 @@ input QuestionStatusTypeNullableFilter {
   in: [QuestionStatusType!]
   notIn: [QuestionStatusType!]
   not: QuestionStatusTypeNullableFilter
-}
-
-input AnswerManyRelationFilter {
-  every: AnswerWhereInput
-  some: AnswerWhereInput
-  none: AnswerWhereInput
 }
 
 input QuestionOrderByInput {
@@ -978,14 +963,6 @@ input QuestionUpdateInput {
   department: DepartmentRelateToOneForUpdateInput
   askedBy: UserRelateToOneForUpdateInput
   tags: TagRelateToManyForUpdateInput
-  answers: AnswerRelateToManyForUpdateInput
-}
-
-input AnswerRelateToManyForUpdateInput {
-  disconnect: [AnswerWhereUniqueInput!]
-  set: [AnswerWhereUniqueInput!]
-  create: [AnswerCreateInput!]
-  connect: [AnswerWhereUniqueInput!]
 }
 
 input QuestionUpdateArgs {
@@ -1000,78 +977,6 @@ input QuestionCreateInput {
   department: DepartmentRelateToOneForCreateInput
   askedBy: UserRelateToOneForCreateInput
   tags: TagRelateToManyForCreateInput
-  answers: AnswerRelateToManyForCreateInput
-}
-
-input AnswerRelateToManyForCreateInput {
-  create: [AnswerCreateInput!]
-  connect: [AnswerWhereUniqueInput!]
-  set: [AnswerWhereUniqueInput!]
-}
-
-type Answer {
-  id: ID!
-  body: Answer_body_Document
-  question: Question
-  answeredBy: User
-  approved: Boolean
-  department: Department
-}
-
-type Answer_body_Document {
-  document(hydrateRelationships: Boolean! = false): JSON!
-}
-
-input AnswerWhereUniqueInput {
-  id: ID
-}
-
-input AnswerWhereInput {
-  AND: [AnswerWhereInput!]
-  OR: [AnswerWhereInput!]
-  NOT: [AnswerWhereInput!]
-  id: IDFilter
-  question: QuestionWhereInput
-  answeredBy: UserWhereInput
-  approved: BooleanFilter
-  department: DepartmentWhereInput
-}
-
-input AnswerOrderByInput {
-  id: OrderDirection
-  approved: OrderDirection
-}
-
-input AnswerUpdateInput {
-  body: JSON
-  question: QuestionRelateToOneForUpdateInput
-  answeredBy: UserRelateToOneForUpdateInput
-  approved: Boolean
-  department: DepartmentRelateToOneForUpdateInput
-}
-
-input QuestionRelateToOneForUpdateInput {
-  create: QuestionCreateInput
-  connect: QuestionWhereUniqueInput
-  disconnect: Boolean
-}
-
-input AnswerUpdateArgs {
-  where: AnswerWhereUniqueInput!
-  data: AnswerUpdateInput!
-}
-
-input AnswerCreateInput {
-  body: JSON
-  question: QuestionRelateToOneForCreateInput
-  answeredBy: UserRelateToOneForCreateInput
-  approved: Boolean
-  department: DepartmentRelateToOneForCreateInput
-}
-
-input QuestionRelateToOneForCreateInput {
-  create: QuestionCreateInput
-  connect: QuestionWhereUniqueInput
 }
 
 """
@@ -1140,12 +1045,6 @@ type Mutation {
   updateQuestions(data: [QuestionUpdateArgs!]!): [Question]
   deleteQuestion(where: QuestionWhereUniqueInput!): Question
   deleteQuestions(where: [QuestionWhereUniqueInput!]!): [Question]
-  createAnswer(data: AnswerCreateInput!): Answer
-  createAnswers(data: [AnswerCreateInput!]!): [Answer]
-  updateAnswer(where: AnswerWhereUniqueInput!, data: AnswerUpdateInput!): Answer
-  updateAnswers(data: [AnswerUpdateArgs!]!): [Answer]
-  deleteAnswer(where: AnswerWhereUniqueInput!): Answer
-  deleteAnswers(where: [AnswerWhereUniqueInput!]!): [Answer]
   endSession: Boolean!
   authenticateUserWithPassword(email: String!, password: String!): UserAuthenticationWithPasswordResult
   createInitialUser(data: CreateInitialUserInput!): UserAuthenticationWithPasswordSuccess!
@@ -1199,12 +1098,11 @@ type Query {
   question(where: QuestionWhereUniqueInput!): Question
   questions(where: QuestionWhereInput! = {}, orderBy: [QuestionOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: QuestionWhereUniqueInput): [Question!]
   questionsCount(where: QuestionWhereInput! = {}): Int
-  answer(where: AnswerWhereUniqueInput!): Answer
-  answers(where: AnswerWhereInput! = {}, orderBy: [AnswerOrderByInput!]! = [], take: Int, skip: Int! = 0, cursor: AnswerWhereUniqueInput): [Answer!]
-  answersCount(where: AnswerWhereInput! = {}): Int
   keystone: KeystoneMeta!
-  authenticatedItem: User
+  authenticatedItem: AuthenticatedItem
 }
+
+union AuthenticatedItem = User
 
 type KeystoneMeta {
   adminMeta: KeystoneAdminMeta!
@@ -1217,27 +1115,29 @@ type KeystoneAdminMeta {
 
 type KeystoneAdminUIListMeta {
   key: String!
+  path: String!
   label: String!
   singular: String!
   plural: String!
-  path: String!
+  description: String
+  pageSize: Int!
   labelField: String!
   fields: [KeystoneAdminUIFieldMeta!]!
   groups: [KeystoneAdminUIFieldGroupMeta!]!
   graphql: KeystoneAdminUIGraphQL!
-  pageSize: Int!
   initialColumns: [String!]!
   initialSearchFields: [String!]!
   initialSort: KeystoneAdminUISort
-  initialFilter: JSON
   isSingleton: Boolean!
-  hideNavigation: Boolean!
   hideCreate: Boolean!
   hideDelete: Boolean!
+  isHidden: Boolean!
+  itemQueryName: String!
+  listQueryName: String!
 }
 
 type KeystoneAdminUIFieldMeta {
-  key: String!
+  path: String!
   label: String!
   description: String
   isOrderable: Boolean!
@@ -1259,8 +1159,12 @@ enum KeystoneAdminUIFieldMetaIsNonNull {
 }
 
 type KeystoneAdminUIFieldMetaCreateView {
-  fieldMode: JSON!
-  isRequired: JSON!
+  fieldMode: KeystoneAdminUIFieldMetaCreateViewFieldMode!
+}
+
+enum KeystoneAdminUIFieldMetaCreateViewFieldMode {
+  edit
+  hidden
 }
 
 type KeystoneAdminUIFieldMetaListView {
@@ -1273,9 +1177,14 @@ enum KeystoneAdminUIFieldMetaListViewFieldMode {
 }
 
 type KeystoneAdminUIFieldMetaItemView {
-  fieldMode: JSON!
-  fieldPosition: KeystoneAdminUIFieldMetaItemViewFieldPosition!
-  isRequired: JSON!
+  fieldMode: KeystoneAdminUIFieldMetaItemViewFieldMode
+  fieldPosition: KeystoneAdminUIFieldMetaItemViewFieldPosition
+}
+
+enum KeystoneAdminUIFieldMetaItemViewFieldMode {
+  edit
+  read
+  hidden
 }
 
 enum KeystoneAdminUIFieldMetaItemViewFieldPosition {

@@ -2,7 +2,7 @@ import { config } from '@keystone-6/core'
 import { statelessSessions } from '@keystone-6/core/session'
 import { createAuth } from '@keystone-6/auth'
 import bytes from 'bytes'
-import express from 'express'
+// express is not required; Keystone serves storage routes automatically
 
 import { lists } from './schema'
 import { seedDemoData } from './seed-data'
@@ -68,25 +68,29 @@ export default withAuth(
       },
     },
     lists,
+    storage: {
+      images: {
+        kind: 'local',
+        type: 'image',
+        storagePath: 'public/images',
+        serverRoute: {
+          path: '/images',
+        },
+        generateUrl: path => `/images${path}`,
+      },
+      files: {
+        kind: 'local',
+        type: 'file',
+        storagePath: 'public/files',
+        serverRoute: {
+          path: '/files',
+        },
+        generateUrl: path => `/files${path}`,
+      },
+    },
     server: {
       maxFileSize: bytes('40Mb')!,
-      extendExpressApp: app => {
-        app.use(
-          '/images',
-          express.static('public/images', { index: false, redirect: false, lastModified: false })
-        )
-        app.use(
-          '/files',
-          express.static('public/files', {
-            setHeaders(res) {
-              res.setHeader('Content-Type', 'application/octet-stream')
-            },
-            index: false,
-            redirect: false,
-            lastModified: false,
-          })
-        )
-      },
+      // Keystone will serve local storage at serverRoute paths; no manual static routes required
     },
     ui: {
       isAccessAllowed: ({ session }) => Boolean(session?.data.role?.canUseAdminUI),

@@ -1,3 +1,5 @@
-import makeInitPage from '@keystone-6/auth/pages/InitPage'
+import { getInitPage } from '@keystone-6/auth/pages/InitPage';
 
-export default makeInitPage({"listKey":"User","authGqlNames":{"itemQueryName":"user","whereUniqueInputName":"UserWhereUniqueInput","authenticateItemWithPassword":"authenticateUserWithPassword","ItemAuthenticationWithPasswordResult":"UserAuthenticationWithPasswordResult","ItemAuthenticationWithPasswordSuccess":"UserAuthenticationWithPasswordSuccess","ItemAuthenticationWithPasswordFailure":"UserAuthenticationWithPasswordFailure","CreateInitialInput":"CreateInitialUserInput","createInitialItem":"createInitialUser"},"fieldPaths":["name","email","password"],"enableWelcome":true})
+const fieldPaths = ["name","email","password"];
+
+export default getInitPage({"listKey":"User","fieldPaths":["name","email","password"],"enableWelcome":true});

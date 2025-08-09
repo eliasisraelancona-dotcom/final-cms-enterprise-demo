@@ -12,7 +12,6 @@ import {
   file,
 } from '@keystone-6/core/fields'
 import { document } from '@keystone-6/fields-document'
-import fs from 'node:fs/promises'
 
 import type { Lists } from '.keystone/types'
 import { isSignedIn, permissions, departmentFilter } from './access'
@@ -157,32 +156,8 @@ export const lists = {
         ],
         defaultValue: 'uploaded',
       }),
-      image: image({
-        storage: {
-          async put(key, data: Buffer) {
-            await fs.writeFile(`public/images/${key}`, data)
-          },
-          async delete(key) {
-            await fs.unlink(`public/images/${key}`)
-          },
-          url(key) {
-            return `http://localhost:3000/images/${key}`
-          },
-        },
-      }),
-      file: file({
-        storage: {
-          async put(key, data: Buffer) {
-            await fs.writeFile(`public/files/${key}`, data)
-          },
-          async delete(key) {
-            await fs.unlink(`public/files/${key}`)
-          },
-          url(key) {
-            return `http://localhost:3000/files/${key}`
-          },
-        },
-      }),
+      image: image({ storage: 'images' }),
+      file: file({ storage: 'files' }),
       brand: relationship({ ref: 'Brand.assets' }),
       department: relationship({ ref: 'Department' }),
       uploadedBy: relationship({ ref: 'User' }),
@@ -300,26 +275,12 @@ export const lists = {
       department: relationship({ ref: 'Department' }),
       askedBy: relationship({ ref: 'User' }),
       tags: relationship({ ref: 'Tag.questions', many: true }),
-      answers: relationship({ ref: 'Answer.question', many: true }),
     },
-  }),
-
-  Answer: list({
-    access: {
-      operation: {
-        query: isSignedIn,
-        create: permissions.canAnswerQuestions,
-        update: permissions.canAnswerQuestions,
-        delete: permissions.canAnswerQuestions,
+    ui: {
+      listView: {
+        initialColumns: ['subject', 'body', 'status'],
       },
-      filter: { query: departmentFilter },
-    },
-    fields: {
-      body: document({ formatting: true, links: true }),
-      question: relationship({ ref: 'Question.answers' }),
-      answeredBy: relationship({ ref: 'User' }),
-      approved: checkbox({ defaultValue: true }),
-      department: relationship({ ref: 'Department' }),
+      labelField: 'subject',
     },
   }),
 } satisfies Lists

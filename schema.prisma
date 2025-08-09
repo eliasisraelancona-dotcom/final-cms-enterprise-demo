@@ -40,7 +40,6 @@ model Department {
   from_AuditLog_department       AuditLog[]       @relation("AuditLog_department")
   from_AnalyticsEvent_department AnalyticsEvent[] @relation("AnalyticsEvent_department")
   from_Question_department       Question[]       @relation("Question_department")
-  from_Answer_department         Answer[]         @relation("Answer_department")
 }
 
 model Brand {
@@ -49,7 +48,7 @@ model Brand {
   slug             String      @unique @default("")
   description      String      @default("")
   complianceStatus String?     @default("needs_review")
-  guidelines       Json
+  guidelines       String      @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
   department       Department? @relation("Brand_department", fields: [departmentId], references: [id])
   departmentId     String?     @map("department")
   owners           User[]      @relation("Brand_owners")
@@ -76,7 +75,6 @@ model User {
   from_AuditLog_user       AuditLog[]       @relation("AuditLog_user")
   from_AnalyticsEvent_user AnalyticsEvent[] @relation("AnalyticsEvent_user")
   from_Question_askedBy    Question[]       @relation("Question_askedBy")
-  from_Answer_answeredBy   Answer[]         @relation("Answer_answeredBy")
 
   @@index([roleId])
   @@index([departmentId])
@@ -96,10 +94,10 @@ model Asset {
   description         String      @default("")
   status              String?     @default("uploaded")
   image_id            String?
-  image_extension     String?
   image_filesize      Int?
   image_width         Int?
   image_height        Int?
+  image_extension     String?
   file_filesize       Int?
   file_filename       String?
   brand               Brand?      @relation("Asset_brand", fields: [brandId], references: [id])
@@ -123,7 +121,7 @@ model Content {
   id           String      @id @default(cuid())
   title        String      @default("")
   status       String?     @default("draft")
-  body         Json
+  body         String      @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
   brand        Brand?      @relation("Content_brand", fields: [brandId], references: [id])
   brandId      String?     @map("brand")
   department   Department? @relation("Content_department", fields: [departmentId], references: [id])
@@ -145,7 +143,7 @@ model AuditLog {
   entityType   String      @default("")
   entityId     String      @default("")
   timestamp    DateTime?   @default(now())
-  meta         Json?
+  meta         String?
   user         User?       @relation("AuditLog_user", fields: [userId], references: [id])
   userId       String?     @map("user")
   department   Department? @relation("AuditLog_department", fields: [departmentId], references: [id])
@@ -163,7 +161,7 @@ model AnalyticsEvent {
   userId       String?     @map("user")
   entityType   String      @default("")
   entityId     String      @default("")
-  meta         Json?
+  meta         String?
   department   Department? @relation("AnalyticsEvent_department", fields: [departmentId], references: [id])
   departmentId String?     @map("department")
 
@@ -174,31 +172,14 @@ model AnalyticsEvent {
 model Question {
   id           String      @id @default(cuid())
   subject      String      @default("")
-  body         Json
+  body         String      @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
   status       String?     @default("new")
   department   Department? @relation("Question_department", fields: [departmentId], references: [id])
   departmentId String?     @map("department")
   askedBy      User?       @relation("Question_askedBy", fields: [askedById], references: [id])
   askedById    String?     @map("askedBy")
   tags         Tag[]       @relation("Question_tags")
-  answers      Answer[]    @relation("Answer_question")
 
   @@index([departmentId])
   @@index([askedById])
-}
-
-model Answer {
-  id           String      @id @default(cuid())
-  body         Json
-  question     Question?   @relation("Answer_question", fields: [questionId], references: [id])
-  questionId   String?     @map("question")
-  answeredBy   User?       @relation("Answer_answeredBy", fields: [answeredById], references: [id])
-  answeredById String?     @map("answeredBy")
-  approved     Boolean     @default(true)
-  department   Department? @relation("Answer_department", fields: [departmentId], references: [id])
-  departmentId String?     @map("department")
-
-  @@index([questionId])
-  @@index([answeredById])
-  @@index([departmentId])
 }
