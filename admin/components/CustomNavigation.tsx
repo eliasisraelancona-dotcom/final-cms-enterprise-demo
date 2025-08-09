@@ -3,11 +3,17 @@
 import { jsx } from '@keystone-ui/core'
 import { NavigationContainer, ListNavItems, NavItem } from '@keystone-6/core/admin-ui/components'
 import type { NavigationProps } from '@keystone-6/core/admin-ui/components'
+import { useKeystone } from '@keystone-6/core/admin-ui/context'
 
 export function CustomNavigation({ authenticatedItem, lists }: NavigationProps) {
+  const keystone = (useKeystone() as unknown) as { endSession?: () => Promise<void> }
   const handleSignOut = async () => {
     try {
-      await fetch('/api/auth/signout', { method: 'POST' })
+      if (keystone?.endSession) {
+        await keystone.endSession()
+      } else {
+        await fetch('/api/auth/signout', { method: 'POST' })
+      }
     } catch {}
     window.location.assign('/signin')
   }
