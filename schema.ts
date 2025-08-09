@@ -272,15 +272,36 @@ export const lists = {
         ],
         defaultValue: 'new',
       }),
+      // When was the question asked (set at create time via hook to avoid SQLite default limitation)
+      askedAt: timestamp(),
+      // Roadmap classification: none | blocker | fyi
+      roadmapType: select({
+        type: 'enum',
+        options: [
+          { label: 'None', value: 'none' },
+          { label: 'Blocker', value: 'blocker' },
+          { label: 'FYI', value: 'fyi' },
+        ],
+        defaultValue: 'none',
+      }),
       department: relationship({ ref: 'Department' }),
       askedBy: relationship({ ref: 'User' }),
       tags: relationship({ ref: 'Tag.questions', many: true }),
     },
     ui: {
       listView: {
-        initialColumns: ['subject', 'body', 'status'],
+        initialColumns: ['subject', 'status', 'askedAt', 'roadmapType'],
       },
       labelField: 'subject',
+    },
+    hooks: {
+      resolveInput: async ({ operation, resolvedData }) => {
+        const data = resolvedData as any
+        if (operation === 'create' && !data.askedAt) {
+          data.askedAt = new Date()
+        }
+        return data
+      },
     },
   }),
 } satisfies Lists
