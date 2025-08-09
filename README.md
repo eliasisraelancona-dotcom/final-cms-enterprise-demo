@@ -35,7 +35,8 @@ npm install
 ```bash
 npm run dev
 ```
-- Admin UI: http://localhost:3000
+- Admin UI: [http://localhost:3000](http://localhost:3000)
+- Login (first-run admin): `eliasisrael@adobe.com` / `12345678`
 - First run seeds demo data; subsequent runs are idempotent (data is preserved).
 
 ### Build and start
@@ -93,6 +94,12 @@ npm run dev
 ---
 
 ## Troubleshooting
+
+- Dev loading page warning (benign during local dev):
+  ```
+  Error: ENOENT: no such file or directory, stat '.../node_modules/@keystone-6/core/scripts/cli/static/dev-loading.html'
+  ```
+  This can appear while the Admin UI is building locally. It is safe to ignore if the Admin UI proceeds to compile and load.
 
 - Port in use:
 ```bash
