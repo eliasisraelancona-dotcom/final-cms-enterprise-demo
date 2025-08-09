@@ -12,7 +12,9 @@
     "postinstall": "keystone postinstall",
     "seed-data": "tsx seed-data.ts"
   },
-  "engines": { "node": ">=18" },
+  "engines": {
+    "node": ">=18"
+  },
   "dependencies": {
     "@keystone-6/auth": "^8.1.0",
     "@keystone-6/core": "^6.5.1",
@@ -20,6 +22,7 @@
     "bytes": "^3.1.2"
   },
   "devDependencies": {
+    "@playwright/test": "1.54.2",
     "@types/bytes": "^3.1.5",
     "tsx": "^4.20.3",
     "typescript": "^5.9.2"

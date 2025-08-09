@@ -29,11 +29,6 @@ self.__BUILD_MANIFEST = {
       "static/chunks/main.js",
       "static/chunks/pages/questions.js"
     ],
-    "/questions/[id]": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/questions/[id].js"
-    ],
     "/signin": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",

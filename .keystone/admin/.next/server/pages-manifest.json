@@ -2,8 +2,8 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/signin": "pages/signin.js",
   "/": "pages/index.js",
   "/questions": "pages/questions.js",
-  "/questions/[id]": "pages/questions/[id].js"
+  "/signin": "pages/signin.js",
+  "/analytics-events": "pages/analytics-events.js"
 }

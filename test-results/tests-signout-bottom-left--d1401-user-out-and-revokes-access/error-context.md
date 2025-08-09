@@ -1,0 +1,125 @@
+# Page snapshot
+
+```yaml
+- heading "Keystone 6" [level=3]:
+  - link "Keystone 6":
+    - /url: /
+    - img
+    - text: Keystone 6
+- banner:
+  - heading "Dashboard" [level=1]
+- complementary:
+  - text: Signed in as
+  - strong: Alice Admin
+  - button "Links and signout"
+  - navigation "Side Navigation":
+    - list:
+      - listitem:
+        - link "Dashboard":
+          - /url: /
+      - listitem:
+        - link "Roles":
+          - /url: /roles
+      - listitem:
+        - link "Departments":
+          - /url: /departments
+      - listitem:
+        - link "Brands":
+          - /url: /brands
+      - listitem:
+        - link "Users":
+          - /url: /users
+      - listitem:
+        - link "Tags":
+          - /url: /tags
+      - listitem:
+        - link "Assets":
+          - /url: /assets
+      - listitem:
+        - link "Contents":
+          - /url: /contents
+      - listitem:
+        - link "Audit Logs":
+          - /url: /audit-logs
+      - listitem:
+        - link "Analytics Events":
+          - /url: /analytics-events
+      - listitem:
+        - link "Questions":
+          - /url: /questions
+      - button "Sign out"
+- main:
+  - list:
+    - listitem:
+      - link "Roles 7 items":
+        - /url: /roles
+        - heading "Roles" [level=3]
+        - text: 7 items
+      - link "Create Role":
+        - /url: /roles/create
+    - listitem:
+      - link "Departments 4 items":
+        - /url: /departments
+        - heading "Departments" [level=3]
+        - text: 4 items
+      - link "Create Department":
+        - /url: /departments/create
+    - listitem:
+      - link "Brands 2 items":
+        - /url: /brands
+        - heading "Brands" [level=3]
+        - text: 2 items
+      - link "Create Brand":
+        - /url: /brands/create
+    - listitem:
+      - link "Users 8 items":
+        - /url: /users
+        - heading "Users" [level=3]
+        - text: 8 items
+      - link "Create User":
+        - /url: /users/create
+    - listitem:
+      - link "Tags 5 items":
+        - /url: /tags
+        - heading "Tags" [level=3]
+        - text: 5 items
+      - link "Create Tag":
+        - /url: /tags/create
+    - listitem:
+      - link "Assets 2 items":
+        - /url: /assets
+        - heading "Assets" [level=3]
+        - text: 2 items
+      - link "Create Asset":
+        - /url: /assets/create
+    - listitem:
+      - link "Contents 2 items":
+        - /url: /contents
+        - heading "Contents" [level=3]
+        - text: 2 items
+      - link "Create Content":
+        - /url: /contents/create
+    - listitem:
+      - link "Audit Logs 2 items":
+        - /url: /audit-logs
+        - heading "Audit Logs" [level=3]
+        - text: 2 items
+      - link "Create Audit Log":
+        - /url: /audit-logs/create
+    - listitem:
+      - link "Analytics Events 2 items":
+        - /url: /analytics-events
+        - heading "Analytics Events" [level=3]
+        - text: 2 items
+      - link "Create Analytics Event":
+        - /url: /analytics-events/create
+    - listitem:
+      - link "Questions 11 items":
+        - /url: /questions
+        - heading "Questions" [level=3]
+        - text: 11 items
+      - link "Create Question":
+        - /url: /questions/create
+- alert
+- alert
+```
