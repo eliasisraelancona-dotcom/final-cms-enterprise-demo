@@ -1,3 +1,3 @@
-import makeSigninPage from '@keystone-6/auth/pages/SigninPage'
+import { getSigninPage } from '@keystone-6/auth/pages/SigninPage'
 
-export default makeSigninPage({"authGqlNames":{"itemQueryName":"user","whereUniqueInputName":"UserWhereUniqueInput","authenticateItemWithPassword":"authenticateUserWithPassword","ItemAuthenticationWithPasswordResult":"UserAuthenticationWithPasswordResult","ItemAuthenticationWithPasswordSuccess":"UserAuthenticationWithPasswordSuccess","ItemAuthenticationWithPasswordFailure":"UserAuthenticationWithPasswordFailure","CreateInitialInput":"CreateInitialUserInput","createInitialItem":"createInitialUser"},"identityField":"email","secretField":"password"})
+export default getSigninPage({"identityField":"email","secretField":"password","mutationName":"authenticateUserWithPassword","successTypename":"UserAuthenticationWithPasswordSuccess","failureTypename":"UserAuthenticationWithPasswordFailure"});

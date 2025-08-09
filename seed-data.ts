@@ -337,14 +337,7 @@ export async function seedDemoData(context: any) {
     ].map((q: any) => context.db.Question.createOne({ data: q }))
   )
 
-  await context.db.Answer.createOne({
-    data: {
-      question: { connect: { id: questions[0].id } },
-      answeredBy: { connect: { id: userByEmail['connie.compliance@example.com'].id } },
-      approved: true,
-      department: { connect: { id: deptBySlug['legal'].id } },
-    },
-  })
+  // Answers removed from schema; skip creating answers
 
   // Analytics Events
   await Promise.all(
