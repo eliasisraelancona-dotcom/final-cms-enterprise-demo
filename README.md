@@ -91,6 +91,11 @@ npm run dev
   - Database path: `./keystone.db` (override via `DATABASE_URL`)
 - Shut down cleanly: Ctrl+C in terminals running the server and tooling
 
+- Project Rules (Cursor):
+  - `@analyze-app`: runs `npm run dev`, collects console logs, and suggests performance improvements.
+  - `@generate-docs`: extracts code comments, analyzes `README.md`, and writes markdown docs to `docs/`.
+  - Note: Uses Project Rules in `.cursor/rules` (legacy `.cursorrules` is deprecated).
+
 ---
 
 ## Troubleshooting

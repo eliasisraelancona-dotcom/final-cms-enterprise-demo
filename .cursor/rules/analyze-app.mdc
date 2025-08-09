@@ -1,0 +1,10 @@
+---
+description: Automate app analysis by running the dev server, capturing logs, and suggesting performance improvements.
+alwaysApply: false
+---
+
+When asked to analyze the app:
+1. Run `npm run dev` in the project root and wait for http://localhost:3000 to be ready.
+2. Capture and review console/server logs for warnings, errors, and slow startups.
+3. Suggest performance improvements (startup time, Prisma/DB configuration, Keystone queries/N+1, caching, indexing, environment toggles).
+

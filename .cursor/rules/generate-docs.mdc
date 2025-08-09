@@ -1,0 +1,15 @@
+---
+description: Help draft documentation by extracting code comments, analyzing README.md, and generating markdown docs.
+alwaysApply: false
+---
+
+Help draft documentation by:
+- Extracting code comments from source (e.g., **/*.ts, **/*.tsx).
+- Analyzing `README.md` for canonical commands and context.
+- Generating markdown documentation to `docs/`:
+  - `OVERVIEW.md`
+  - `ARCHITECTURE.md`
+  - `OPERATIONS.md`
+
+@README.md
+
