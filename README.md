@@ -1,4 +1,4 @@
-# As of Friday AUgust 8th at 7:15 PM EST we are going to use this demo moving forward
+# As of Friday August 8th at 7:15 PM EST we are going to use this demo moving forward
 
 ## Adobe Enterprise CMS (Demo)
 
@@ -11,7 +11,7 @@ This repository contains a demonstration Digital Asset Management (DAM) and CMS 
 - Content Workflows: Draft → Review → Approved → Published with reviewers
 - Audit & Analytics: audit logs and analytics events
 - Department Isolation: access control by department
-- Q&A: questions, answers, and tagging
+- Q&A: questions with rich bodies and tagging (includes seeded FAQs)
 
 ### Technology
 - Keystone 6
@@ -39,6 +39,18 @@ npm run dev
 - Login (first-run admin): `eliasisrael@adobe.com` / `12345678`
 - First run seeds demo data; subsequent runs are idempotent (data is preserved).
 
+### Seeded FAQs
+- Questions are pre-seeded under the `Questions` list and marked as "Answered" so they persist across fresh clones. Topics include:
+  - How Cursor safeguards source code and IP
+  - How Cursor understands your codebase (library/index-cards metaphor)
+  - Privacy Mode guarantees and how it is enforced
+  - Client security model (VS Code fork / cherry-picked patches)
+  - How to customize behavior via Rules (user vs project)
+  - Deploying/managing Cursor across teams
+  - Security & Privacy overview
+  - How the TAM supports your team
+  - Cursor vs Copilot/Codeium
+
 ### Build and start
 ```bash
 npm run build
@@ -56,6 +68,7 @@ npm start
 rm -f keystone.db
 npm run dev
 ```
+This will reseed the demo, including the curated FAQs.
 
 ---
 
@@ -110,6 +123,9 @@ npm run dev
 ```bash
 lsof -ti :3000 | xargs kill -9
 ```
+
+- Temporary ENOENT on `/signin` during Admin UI build:
+  - If you briefly see an `ENOENT ... dev-loading.html` error while the Admin UI compiles, wait a moment and refresh once the UI reports ready in the terminal.
 
 - Prisma Studio:
 ```bash
