@@ -933,6 +933,7 @@ enum QuestionRoadmapTypeType {
   none
   blocker
   fyi
+  in_progress
 }
 
 input QuestionWhereUniqueInput {

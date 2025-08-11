@@ -274,13 +274,21 @@ export const lists = {
       }),
       // When was the question asked (set at create time via hook to avoid SQLite default limitation)
       askedAt: timestamp(),
-      // Roadmap classification: none | blocker | fyi
+      // The `roadmapType` field is an enum select field for the Question list.
+      // It lets users categorize a question's relevance to the product roadmap.
+      // Options:
+      //   - None: Not related to the roadmap.
+      //   - Blocker: This question highlights a blocking issue.
+      //   - FYI: For informational purposes only.
+      //   - In Progress: The issue is being worked on.
+      // The default value is 'none'.
       roadmapType: select({
         type: 'enum',
         options: [
           { label: 'None', value: 'none' },
           { label: 'Blocker', value: 'blocker' },
           { label: 'FYI', value: 'fyi' },
+          { label: 'In Progress', value: 'in_progress' },
         ],
         defaultValue: 'none',
       }),
