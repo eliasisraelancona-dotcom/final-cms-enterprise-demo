@@ -20,7 +20,7 @@
   rm -f keystone.db
   npm run dev
   ```
-  This recreates the demo data, including the curated FAQs in `Questions`.
+  This recreates the demo data, including the curated FAQs in `Questions` with roadmap type categorization.
 - Prisma Studio:
   ```bash
   DATABASE_URL="file:./keystone.db" npx prisma generate

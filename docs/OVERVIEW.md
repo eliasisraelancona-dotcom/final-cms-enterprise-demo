@@ -14,10 +14,18 @@ Enterprise-grade demo of DAM + CMS with RBAC, workflows, brand governance, and a
 - Brand Management: multi-brand, compliance status/guidelines
 - Content Workflows: Draft → Review → Approved → Published
 - Audit & Analytics events
-- Department isolation and Q&A with tagging
+- Department isolation and Q&A with tagging and roadmap categorization
 
 ## Seeded FAQs
 - The demo seeds a set of enterprise-focused questions (marked Answered) covering security/privacy, Privacy Mode guarantees, rules customization, enterprise rollout, and comparisons (Cursor vs Copilot/Codeium). These live under `Questions` in the Admin UI and persist across fresh clones via seeding.
+
+## Question Management & Roadmap Types
+- Questions support roadmap categorization with four types:
+  - **None**: Default state for general questions
+  - **Blocker**: Critical issues preventing progress
+  - **FYI**: Informational items for awareness
+  - **In Progress**: Questions/issues currently being actively worked on
+- Roadmap types enable better project tracking and team coordination across departments
 
 ## How to Run
 - Install: `npm install`
