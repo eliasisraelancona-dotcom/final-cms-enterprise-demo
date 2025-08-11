@@ -8,13 +8,13 @@ async function ensureSuperAdmin(context: any) {
   if (existing.length > 0) return
 
   let adminRole = (
-    await context.db.Role.findMany({ where: { name: { equals: 'Admin' } }, take: 1 })
+    await context.db.Role.findMany({ where: { name: { equals: 'Administrator' } }, take: 1 })
   )[0]
 
   if (!adminRole) {
     adminRole = await context.db.Role.createOne({
       data: {
-        name: 'Admin',
+        name: 'Administrator',
         canUseAdminUI: true,
         canManageUsers: true,
         canManageAssets: true,
@@ -66,7 +66,7 @@ export async function seedDemoData(context: any) {
   const roles = await Promise.all(
     [
       {
-        name: 'Admin',
+        name: 'Administrator',
         canUseAdminUI: true,
         canManageUsers: true,
         canManageAssets: true,
@@ -172,17 +172,17 @@ export async function seedDemoData(context: any) {
   const users = await Promise.all(
     [
       {
-        name: 'Alice Admin',
+        name: 'Alice Administrator',
         email: 'alice.admin@example.com',
         password: 'password',
-        role: { connect: { id: roleByName['Admin'].id } },
+        role: { connect: { id: roleByName['Administrator'].id } },
         department: { connect: { id: deptBySlug['marketing'].id } },
       },
       {
         name: 'Elias Israel',
         email: 'eliasisrael@adobe.com',
         password: '12345678',
-        role: { connect: { id: roleByName['Admin'].id } },
+        role: { connect: { id: roleByName['Administrator'].id } },
         // optional department; Admin can access all departments regardless
       },
       {

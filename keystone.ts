@@ -16,10 +16,10 @@ const { withAuth } = createAuth({
   initFirstItem: {
     fields: ['name', 'email', 'password'],
     itemData: {
-      // Create an Admin role on first run so the initial user has access
+      // Create an Administrator role on first run so the initial user has access
       role: {
         create: {
-          name: 'Admin',
+          name: 'Administrator',
           canUseAdminUI: true,
           canManageUsers: true,
           canManageAssets: true,
